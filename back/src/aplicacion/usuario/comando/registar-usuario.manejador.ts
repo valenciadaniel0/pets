@@ -7,12 +7,12 @@ import { Usuario } from 'src/dominio/usuario/modelo/usuario';
 export class ManejadorRegistrarUsuario {
   constructor(private _servicioRegistrarUsuario: ServicioRegistrarUsuario) {}
 
-  async ejecutar(comandoRegistrarUsuario: ComandoRegistrarUsuario) {
+  async ejecutar(comandoRegistrarUsuario: ComandoRegistrarUsuario) {    
     await this._servicioRegistrarUsuario.ejecutar(
       new Usuario(
-        comandoRegistrarUsuario.nombre,
-        comandoRegistrarUsuario.clave,
-        comandoRegistrarUsuario.fechaCreacion,
+        comandoRegistrarUsuario.name,
+        comandoRegistrarUsuario.email,
+        comandoRegistrarUsuario.password       
       ),
     );
   }

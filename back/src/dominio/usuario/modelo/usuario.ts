@@ -1,17 +1,16 @@
-import { ErrorLongitudInvalida } from 'src/dominio/excepciones/error-longitud-invalida';
+import { ErrorLongitudInvalida } from 'src/dominio/errores/error-longitud-invalida';
 
 const NUMERO_MINIMO_CARACTERES_CLAVE = 4;
-
 export class Usuario {
-  private _nombre: string;
-  private _clave: string;
-  private _fechaCreacion: Date;
+  readonly #name: string;
+  readonly #email: string;
+  readonly #password: string;  
 
-  constructor(nombre: string, clave: string, fechaCreacion: Date) {
-    this.validarTamanoClave(clave);
-    this._nombre = nombre;
-    this._clave = clave;
-    this._fechaCreacion = fechaCreacion;
+  constructor(name: string,email: string, password: string) {
+    this.validarTamanoClave(password);
+    this.#name = name;
+    this.#email = email;
+    this.#password = password;    
   }
 
   private validarTamanoClave(clave: string) {
@@ -22,15 +21,15 @@ export class Usuario {
     }
   }
 
-  get nombre(): string {
-    return this._nombre;
+  get name(): string {
+    return this.#name;
   }
 
-  get clave(): string {
-    return this._clave;
+  get email(): string {
+    return this.#email;
   }
 
-  get fechaCreacion(): Date {
-    return this._fechaCreacion;
+  get password(): string {
+    return this.#password;
   }
 }

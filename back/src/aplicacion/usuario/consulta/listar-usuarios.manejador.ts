@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 
 import { DaoUsuario } from 'src/dominio/usuario/puerto/dao/dao-usuario';
-import { UsuarioDTO } from 'src/dominio/usuario/modelo/usuario.dto';
+import { UsuarioDto } from 'src/aplicacion/usuario/consulta/dto/usuario.dto';
 
 @Injectable()
 export class ManejadorListarUsuario {
   constructor(private _daoUsuario: DaoUsuario) {}
 
-  async ejecutar(): Promise<UsuarioDTO[]> {
+  async ejecutar(): Promise<UsuarioDto[]> {
     return await this._daoUsuario.listar();
   }
 }

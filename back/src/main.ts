@@ -1,13 +1,18 @@
 import { NestFactory } from '@nestjs/core';
-import { Logger } from '@nestjs/common';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { ValidationPipe } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { FiltroExcepcionesDeNegocio } from './infraestructura/excepciones/filtro-excepciones-negocio';
+import { CeibaLogger } from './infraestructura/configuracion/ceiba-logger.config';
+import { ConfigService } from '@nestjs/config';
+import { EnvVariables } from './infraestructura/configuracion/environment/env-variables.enum';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const logger = app.get(Logger);
+  const logger = await app.resolve(CeibaLogger);
+  const configService = app.get(ConfigService);
 
+  app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new FiltroExcepcionesDeNegocio(logger));
 
   const swaggerOptions = new DocumentBuilder()
@@ -17,8 +22,9 @@ async function bootstrap() {
     .build();
 
   const swaggerDocument = SwaggerModule.createDocument(app, swaggerOptions);
-  SwaggerModule.setup('api', app, swaggerDocument);
+  SwaggerModule.setup('/api/doc', app, swaggerDocument);
 
-  await app.listen(3000);
+  app.setGlobalPrefix(configService.get(EnvVariables.APPLICATION_CONTEXT_PATH));
+  await app.listen(configService.get(EnvVariables.APPLICATION_PORT));
 }
 bootstrap();

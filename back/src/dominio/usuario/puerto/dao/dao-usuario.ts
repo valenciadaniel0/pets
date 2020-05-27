@@ -1,5 +1,5 @@
-import { UsuarioDTO } from '../../modelo/usuario.dto';
+import { UsuarioDto } from 'src/aplicacion/usuario/consulta/dto/usuario.dto';
 
 export abstract class DaoUsuario {
-  abstract async listar(): Promise<UsuarioDTO[]>;
+  abstract async listar(): Promise<UsuarioDto[]>;
 }

@@ -29,6 +29,7 @@ Para mayor documentación del patrón [https://martinfowler.com/bliki/CQRS.html]
 - El código se encuentra agrupado por el patrón [agregado](https://martinfowler.com/bliki/DDD_Aggregate.html) los cuales se convierten en [módulos nestjs](https://docs.nestjs.com/modules) agrupados en la capa de infraestructura
 - Uso de TypeOrm para el acceso a datos, en el archivo **ormconfig.json** se encuentran los datos de conexión a la bd
 - Uso de [Jest](https://docs.nestjs.com/fundamentals/testing#testing) para las pruebas automatizadas
+- Uso de [Sinon.JS](https://sinonjs.org/releases/v9.0.2/) para facilitar la creación de stubs, mocks y spies.
 - Ejemplo de pruebas automatizadas con Jmeter
 - Contiene los plugin de lint y prettier, se recomienda ejecutarlos antes de subir código al repositorio o agregarlos como un hook.
 - Contiene la configuración para jenkins y sonar con análisis de cobertura y deuda técnica.
@@ -45,35 +46,38 @@ El bloque hace uso de [TypeORM](https://typeorm.io/#/), este provee funciones pa
 - `$ npx typeorm migration:run`: Ejecuta nuestras migraciones. Es importante haber compilado nuestro TypeScript a JavaScript antes de correr el comando, ya que no funciona sobre archivos `.ts`, con solo iniciar el servidor mediante `$ npm start` basta.
 - `$ npx typeorm migration:revert`: Ejecuta la función `down` de la última migración ejecutada.
 
-## Installation
+## Instalación
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+## Arrancar la aplicación
 
 ```bash
-# development
+# desarrollo
 $ npm run start
 
-# watch mode
+# modo desarrollo-vigilante (Reinicia el servidor cuando detecta cambios)
 $ npm run start:dev
 
-# production mode
-$ npm run start:prod
+# modo producción
+$ npm run build & npm run start:prod
 ```
 
-## Test
+## Pruebas
 
 ```bash
-# unit tests
-$ npm run test
+# pruebas unitarias
+$ npm run test:unit
 
-# e2e tests
+# pruebas de integración
 $ npm run test:e2e
 
-# test coverage
+# todas las pruebas
+$ npm run test
+
+# todas las pruebas con cobertura
 $ npm run test:cov
 ```
 

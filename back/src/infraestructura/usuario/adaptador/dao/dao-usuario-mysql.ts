@@ -1,17 +1,19 @@
-import { InjectEntityManager } from '@nestjs/typeorm';
 import { EntityManager } from 'typeorm';
+import { InjectEntityManager } from '@nestjs/typeorm';
+import { Injectable } from '@nestjs/common';
 import { DaoUsuario } from 'src/dominio/usuario/puerto/dao/dao-usuario';
-import { UsuarioDTO } from 'src/dominio/usuario/modelo/usuario.dto';
+import { UsuarioDto } from 'src/aplicacion/usuario/consulta/dto/usuario.dto';
 
+@Injectable()
 export class DaoUsuarioMysql implements DaoUsuario {
   constructor(
     @InjectEntityManager()
     private readonly entityManager: EntityManager,
   ) {}
 
-  async listar(): Promise<UsuarioDTO[]> {
+  async listar(): Promise<UsuarioDto[]> {
     return await this.entityManager.query(
-      'SELECT u.nombre, u.clave FROM USUARIO u',
+      'SELECT u.name, u.createdAt FROM users u',
     );
   }
 }

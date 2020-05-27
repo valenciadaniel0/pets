@@ -1,8 +1,15 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { ComandoRegistrarUsuario } from 'src/aplicacion/usuario/comando/registrar-usuario.comando';
 import { ManejadorRegistrarUsuario } from 'src/aplicacion/usuario/comando/registar-usuario.manejador';
 import { ManejadorListarUsuario } from 'src/aplicacion/usuario/consulta/listar-usuarios.manejador';
-import { UsuarioDTO } from 'src/dominio/usuario/modelo/usuario.dto';
+import { UsuarioDto } from 'src/aplicacion/usuario/consulta/dto/usuario.dto';
 
 @Controller('usuarios')
 export class UsuarioControlador {
@@ -12,12 +19,14 @@ export class UsuarioControlador {
   ) {}
 
   @Post()
+  @UsePipes(new ValidationPipe({ transform: true }))
   async crear(@Body() comandoRegistrarUsuario: ComandoRegistrarUsuario) {
+    console.log(process.env.PORT, process.env.NODE_ENV);
     await this._manejadorRegistrarUsuario.ejecutar(comandoRegistrarUsuario);
   }
 
   @Get()
-  async listar(): Promise<UsuarioDTO[]> {
+  async listar(): Promise<UsuarioDto[]> {
     return await this._manejadorListarUsuario.ejecutar();
   }
 }
