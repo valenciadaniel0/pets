@@ -74,9 +74,9 @@ describe('Pruebas al controlador de usuarios', () => {
 
   it('debería fallar al registar un usuario clave muy corta', async () => {
     const usuario: ComandoRegistrarUsuario = {
-      nombre: 'Lorem ipsum',
-      fechaCreacion: (new Date()).toISOString(),
-      clave: '123',
+      name: 'Lorem ipsum',
+      email: 'valenciadaniel0@gmail.com',
+      password: '123',
     };
     const mensaje = 'El tamaño mínimo de la clave debe ser 4';
 
@@ -87,14 +87,14 @@ describe('Pruebas al controlador de usuarios', () => {
     expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
   });
 
-  it('debería fallar al registar un usuario ya existente', async () => {
+  it('debería fallar al registar un usuario cuyo email ya existe', async () => {
     const usuario: ComandoRegistrarUsuario = {
-      nombre: 'Lorem ipsum',
-      fechaCreacion: (new Date()).toISOString(),
-      clave: '1234',
+      name: 'Lorem ipsum',
+      email: 'valenciadaniel0@gmail.com',
+      password: '1234',
     };
-    const mensaje = `El nombre de usuario ${usuario.nombre} ya existe`;
-    repositorioUsuario.existeNombreUsuario.returns(Promise.resolve(true));
+    const mensaje = `El email ${usuario.email} ya ha sido tomado`;
+    repositorioUsuario.existeEmailUsuario.returns(Promise.resolve(true));
 
     const response = await request(app.getHttpServer())
       .post('/usuarios').send(usuario)

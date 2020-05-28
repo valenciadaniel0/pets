@@ -12,6 +12,15 @@ export class PetMysqlRepository implements PetRepository {
     private readonly repository: Repository<PetEntity>,
   ) {}
 
+  async find(id: number): Promise<Pet> {
+    let petEntity: PetEntity = await this.repository.findOne({ id: id });
+    return new Pet(petEntity.name, petEntity.birthDate, []);
+  }
+
+  async petExists(id: number): Promise<boolean> {
+    return (await this.repository.count({ id: id })) > 0;
+  }
+
   async save(pet: Pet) {
     const entity = new PetEntity();
     entity.name = pet.name;

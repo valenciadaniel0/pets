@@ -9,7 +9,11 @@ export class StorePetHandler {
 
   async run(storePetCommand: StorePetCommand) {
     await this._storePetService.run(
-      new Pet(storePetCommand.name, storePetCommand.birthDate),
+      new Pet(
+        storePetCommand.name,
+        storePetCommand.birthDate,
+        storePetCommand.vaccines,
+      ),
     );
   }
 }

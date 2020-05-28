@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { NodeEnv } from './configuracion/environment/env-node.enum';
 import { databaseConfigFactory } from './configuracion/database.config';
 import { PetModule } from './pet/pet.module';
+import { VaccineModule } from './vaccine/vaccine.module';
 
 @Module({
   providers: [CeibaLogger],
@@ -25,7 +26,8 @@ import { PetModule } from './pet/pet.module';
       }),
     }),
     UsuarioModule,  
-    PetModule  
+    PetModule,
+    VaccineModule
   ],
 })
 export class InfraestructuraModule {
