@@ -6,18 +6,25 @@ import { PetRepository } from "src/dominio/usuario/puerto/repositorio/pet-reposi
 import { storePetServiceProvider } from "./service/store-pet-service-provider";
 import { petRepositoryProvider } from "./repository/pet-repository-provider";
 import { StorePetHandler } from "src/aplicacion/usuario/comando/store-pet.handler";
+import { petDaoProvider } from "./dao/pet-dao.provider";
+import { ListPetsHandler } from "src/aplicacion/usuario/consulta/list-pets.handler";
+import { PetDao } from "src/dominio/usuario/puerto/dao/pet-dao";
 
 @Module({
     imports: [TypeOrmModule.forFeature([PetEntity])],
     providers: [
       { provide: StorePetService, inject: [PetRepository], useFactory: storePetServiceProvider },
       petRepositoryProvider,      
-      StorePetHandler      
+      petDaoProvider,
+      StorePetHandler,
+      ListPetsHandler
     ],
     exports: [
       StorePetService,
       StorePetHandler,
-      PetRepository      
+      PetRepository,
+      ListPetsHandler,
+      PetDao      
     ],
   })
   export class PetProviderModule {
