@@ -6,20 +6,22 @@ import { connect } from "react-redux";
 import {
   listPetsAsync,
   savePetAsync,
-  findPetAsync
+  findPetAsync,
+  deletePetAsync,
 } from "../../redux/acciones/pets/pets.actions";
 import { Container, Button, Collapse } from "react-bootstrap";
 import PetsCreate from "./PetsCreate";
-import VaccinesModal from "./VaccinesModal";
+import VaccinesModal from "../vaccines/VaccinesModal";
 
 interface Props {
   pets: Array<Pet>;
   listPets: (pageNumber: number) => void;
   savePet: (formValues: any) => void;
+  deletePet: (id: number) => void;
 }
 
 class PetsContainer extends React.Component<Props, any> {
-  state = { open: false, showModal: false, petId: 0 };
+  state = { open: false, showModal: false, petId: 0, petName: "" };
 
   componentDidMount() {
     this.props.listPets(1);
@@ -31,14 +33,19 @@ class PetsContainer extends React.Component<Props, any> {
 
   onSubmitPets = (formValues: any) => {
     this.props.savePet(formValues);
+    this.setState({ open: false });
   };
 
-  handleOpenModal = (id: number) => {
-    this.setState({ showModal: true, petId: id });
+  handleOpenModal = (id: number, name: string) => {
+    this.setState({ showModal: true, petId: id, petName: name });
   };
 
   handleCloseModal = () => {
     this.setState({ showModal: false });
+  };
+
+  deletePet = (id: number) => {
+    this.props.deletePet(id);
   };
 
   render() {
@@ -57,11 +64,16 @@ class PetsContainer extends React.Component<Props, any> {
             <PetsCreate onSubmit={this.onSubmitPets} />
           </div>
         </Collapse>
-        <PetsList pets={this.props.pets} handleOpen={this.handleOpenModal} />
+        <PetsList
+          pets={this.props.pets}
+          handleOpen={this.handleOpenModal}
+          handleDeletePet={this.deletePet}
+        />
         <VaccinesModal
           show={this.state.showModal}
           handleClose={this.handleCloseModal}
           petId={this.state.petId}
+          petName={this.state.petName}
         />
       </Container>
     );
@@ -75,5 +87,6 @@ const mapStateToProps = (state: EstadoGeneral) => {
 export default connect(mapStateToProps, {
   listPets: listPetsAsync,
   savePet: savePetAsync,
-  findPet:findPetAsync
+  findPet: findPetAsync,
+  deletePet: deletePetAsync,
 })(PetsContainer);

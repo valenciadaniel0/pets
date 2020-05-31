@@ -1,4 +1,4 @@
-import { Vaccine } from "src/dominio/usuario/modelo/vaccine";
+import { Vaccine } from "src/dominio/vaccine/model/vaccine";
 import { ErrorValorRequerido } from "src/dominio/errores/error-valor-requerido";
 
 describe('Vaccine', () => {

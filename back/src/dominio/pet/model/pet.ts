@@ -1,5 +1,5 @@
 import { ErrorValorRequerido } from "src/dominio/errores/error-valor-requerido";
-import { Vaccine } from "./vaccine";
+import { Vaccine } from "../../vaccine/model/vaccine";
 
 export class Pet{
   readonly #id:number;

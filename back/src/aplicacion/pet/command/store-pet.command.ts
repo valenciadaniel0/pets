@@ -1,6 +1,6 @@
 import { IsString, IsArray } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { Vaccine } from 'src/dominio/usuario/modelo/vaccine';
+import { Vaccine } from 'src/dominio/vaccine/model/vaccine';
 
 export class StorePetCommand {
   @IsString()

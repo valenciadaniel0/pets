@@ -15,6 +15,9 @@ export class VaccineEntity {
   @ManyToOne(
     type => PetEntity,
     pet => pet.vaccines,
+    {
+      onDelete: 'CASCADE',
+    },
   )
   pet: PetEntity;
 }

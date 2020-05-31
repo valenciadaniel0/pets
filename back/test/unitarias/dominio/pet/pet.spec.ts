@@ -1,4 +1,4 @@
-import { Pet } from 'src/dominio/usuario/modelo/pet';
+import { Pet } from 'src/dominio/pet/model/pet';
 import { ErrorValorRequerido } from 'src/dominio/errores/error-valor-requerido';
 
 describe('Pet', () => {

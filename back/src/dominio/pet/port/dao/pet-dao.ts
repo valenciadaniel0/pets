@@ -1,4 +1,4 @@
-import { PetDto } from 'src/aplicacion/usuario/consulta/dto/pet.dto';
+import { PetDto } from 'src/aplicacion/pet/query/dto/pet.dto';
 
 export abstract class PetDao {
   abstract async find(id:number):Promise<PetDto>;

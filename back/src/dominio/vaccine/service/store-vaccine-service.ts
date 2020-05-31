@@ -1,5 +1,5 @@
-import { VaccineRepository } from '../puerto/repositorio/vaccine-repository';
-import { Vaccine } from '../modelo/vaccine';
+import { VaccineRepository } from '../port/repository/vaccine-repository';
+import { Vaccine } from '../model/vaccine';
 
 export class StoreVaccineService {
   constructor(private readonly _vaccineRepository: VaccineRepository) {}

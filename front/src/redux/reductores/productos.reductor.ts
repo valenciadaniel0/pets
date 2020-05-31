@@ -2,24 +2,27 @@ import {
   AGREGAR_PRODUCTO,
   ELIMINAR_PRODUCTO,
   LISTAR_PRODUCTOS,
-  TiposAccionesProducto
-} from '../acciones/productos/productos.tipos-acciones';
-import { EstadoProducto } from '../modelo/EstadoProducto';
-import { Producto } from '../../componentes/productos/modelo/Producto';
+  TiposAccionesProducto,
+} from "../acciones/productos/productos.tipos-acciones";
+import { EstadoProducto } from "../modelo/EstadoProducto";
+import { Producto } from "../../componentes/productos/modelo/Producto";
 
 const initialState: EstadoProducto = {
   productos: Array<Producto>(),
-  cantidadTotalProducto: 0
+  cantidadTotalProducto: 0,
 };
 
-export default function (state = initialState, action: TiposAccionesProducto): EstadoProducto {
+export default function (
+  state = initialState,
+  action: TiposAccionesProducto
+): EstadoProducto {
   switch (action.type) {
     case LISTAR_PRODUCTOS: {
       const productos = action.payload;
       return {
         ...state,
         productos: productos,
-        cantidadTotalProducto: action.cantidadTotalProducto
+        cantidadTotalProducto: action.cantidadTotalProducto,
       };
     }
     case AGREGAR_PRODUCTO: {
@@ -34,7 +37,9 @@ export default function (state = initialState, action: TiposAccionesProducto): E
       const producto = action.payload;
       return {
         ...state,
-        productos: [...state.productos.filter(p => p.title !== producto.title)],
+        productos: [
+          ...state.productos.filter((p) => p.title !== producto.title),
+        ],
       };
     }
 

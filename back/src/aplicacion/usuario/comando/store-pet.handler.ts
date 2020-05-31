@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { StorePetService } from 'src/dominio/usuario/servicio/store-pet-service';
-import { StorePetCommand } from './store-pet.command';
-import { Pet } from 'src/dominio/usuario/modelo/pet';
+import { StorePetService } from 'src/dominio/pet/service/store-pet-service';
+import { StorePetCommand } from '../../pet/command/store-pet.command';
+import { Pet } from 'src/dominio/pet/model/pet';
 
 @Injectable()
 export class StorePetHandler {

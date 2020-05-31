@@ -6,17 +6,20 @@ import {
   Body,
   Get,
   Param,
+  Delete,
 } from '@nestjs/common';
-import { StorePetHandler } from 'src/aplicacion/usuario/comando/store-pet.handler';
-import { StorePetCommand } from 'src/aplicacion/usuario/comando/store-pet.command';
-import { PetDto } from 'src/aplicacion/usuario/consulta/dto/pet.dto';
-import { ListPetsHandler } from 'src/aplicacion/usuario/consulta/list-pets.handler';
-import { FindPetHandler } from 'src/aplicacion/usuario/consulta/find-pet.handler';
+import { StorePetHandler } from 'src/aplicacion/pet/command/store-pet.handler';
+import { StorePetCommand } from 'src/aplicacion/pet/command/store-pet.command';
+import { PetDto } from 'src/aplicacion/pet/query/dto/pet.dto';
+import { ListPetsHandler } from 'src/aplicacion/pet/query/list-pets.handler';
+import { FindPetHandler } from 'src/aplicacion/pet/query/find-pet.handler';
+import { DeletePetHandler } from 'src/aplicacion/pet/command/delete-pet.handler';
 
 @Controller('pets')
 export class PetController {
   constructor(
     private readonly _storePetHandler: StorePetHandler,
+    private readonly _deletePetHandler: DeletePetHandler,
     private readonly _listPetsHandler: ListPetsHandler,
     private readonly _findPetsHandler: FindPetHandler,
   ) {}
@@ -25,6 +28,11 @@ export class PetController {
   @UsePipes(new ValidationPipe({ transform: true }))
   async create(@Body() storePetCommand: StorePetCommand) {
     await this._storePetHandler.run(storePetCommand);
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: number) {
+    await this._deletePetHandler.run(id);
   }
 
   @Get()

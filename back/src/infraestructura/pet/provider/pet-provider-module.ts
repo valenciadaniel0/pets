@@ -1,25 +1,30 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { PetEntity } from "../entity/pet.entity";
-import { StorePetService } from "src/dominio/usuario/servicio/store-pet-service";
-import { PetRepository } from "src/dominio/usuario/puerto/repositorio/pet-repository";
+import { StorePetService } from "src/dominio/pet/service/store-pet-service";
+import { PetRepository } from "src/dominio/pet/port/repository/pet-repository";
 import { storePetServiceProvider } from "./service/store-pet-service-provider";
 import { petRepositoryProvider } from "./repository/pet-repository-provider";
-import { StorePetHandler } from "src/aplicacion/usuario/comando/store-pet.handler";
+import { StorePetHandler } from "src/aplicacion/pet/command/store-pet.handler";
 import { petDaoProvider } from "./dao/pet-dao.provider";
-import { ListPetsHandler } from "src/aplicacion/usuario/consulta/list-pets.handler";
-import { PetDao } from "src/dominio/usuario/puerto/dao/pet-dao";
-import { FindPetHandler } from "src/aplicacion/usuario/consulta/find-pet.handler";
+import { ListPetsHandler } from "src/aplicacion/pet/query/list-pets.handler";
+import { PetDao } from "src/dominio/pet/port/dao/pet-dao";
+import { FindPetHandler } from "src/aplicacion/pet/query/find-pet.handler";
+import { DeletePetHandler } from "src/aplicacion/pet/command/delete-pet.handler";
+import { DeletePetService } from "src/dominio/pet/service/delete-pet-service";
+import { deletePetServiceProvider } from "./service/delete-pet-service-provider";
 
 @Module({
     imports: [TypeOrmModule.forFeature([PetEntity])],
     providers: [
       { provide: StorePetService, inject: [PetRepository], useFactory: storePetServiceProvider },
+      { provide: DeletePetService, inject: [PetRepository], useFactory: deletePetServiceProvider },
       petRepositoryProvider,      
-      petDaoProvider,
+      petDaoProvider,      
       StorePetHandler,
       ListPetsHandler,
-      FindPetHandler
+      FindPetHandler,
+      DeletePetHandler
     ],
     exports: [
       StorePetService,
@@ -27,6 +32,7 @@ import { FindPetHandler } from "src/aplicacion/usuario/consulta/find-pet.handler
       PetRepository,
       ListPetsHandler,
       FindPetHandler,
+      DeletePetHandler,
       PetDao      
     ],
   })

@@ -1,5 +1,5 @@
-import { PetDao } from 'src/dominio/usuario/puerto/dao/pet-dao';
-import { PetDto } from 'src/aplicacion/usuario/consulta/dto/pet.dto';
+import { PetDao } from 'src/dominio/pet/port/dao/pet-dao';
+import { PetDto } from 'src/aplicacion/pet/query/dto/pet.dto';
 import { InjectEntityManager } from '@nestjs/typeorm';
 import { EntityManager } from 'typeorm';
 

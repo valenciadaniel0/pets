@@ -3,13 +3,13 @@ import {
   LIST_PETS,
   SAVE_PET,
   PetsTypesActions,
+  DELETE_PET,
 } from "../acciones/pets/pets-types-actions";
 import { PetsStatus } from "../modelo/PetsStatus";
 
-
 const initialState: PetsStatus = {
   pets: Array<Pet>(),
-  totalQuantity: 0  
+  totalQuantity: 0,
 };
 
 export default function (
@@ -25,7 +25,25 @@ export default function (
         totalQuantity: action.totalQuantity,
       };
     }
-    
+
+    case DELETE_PET: {
+      const pets = action.payload;
+      return {
+        ...state,
+        pets: pets,
+        totalQuantity: action.totalQuantity,
+      };
+    }
+
+    case SAVE_PET: {
+      const pets = action.payload;
+      return {
+        ...state,
+        pets: pets,
+        totalQuantity: action.totalQuantity,
+      };
+    }
+
     default:
       return state;
   }

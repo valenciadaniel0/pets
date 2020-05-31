@@ -1,5 +1,5 @@
-import { VaccineRepository } from 'src/dominio/usuario/puerto/repositorio/vaccine-repository';
-import { StoreVaccineService } from 'src/dominio/usuario/servicio/store-vaccine-service';
+import { VaccineRepository } from 'src/dominio/vaccine/port/repository/vaccine-repository';
+import { StoreVaccineService } from 'src/dominio/vaccine/service/store-vaccine-service';
 
 export function storeVaccineServiceProvider(
   vaccineRepository: VaccineRepository,

@@ -1,8 +1,8 @@
-import { StorePetService } from 'src/dominio/usuario/servicio/store-pet-service';
-import { PetRepository } from 'src/dominio/usuario/puerto/repositorio/pet-repository';
+import { StorePetService } from 'src/dominio/pet/service/store-pet-service';
+import { PetRepository } from 'src/dominio/pet/port/repository/pet-repository';
 import { SinonStubbedInstance } from 'sinon';
 import { createStubObj } from 'test/util/create-object.stub';
-import { Pet } from 'src/dominio/usuario/modelo/pet';
+import { Pet } from 'src/dominio/pet/model/pet';
 
 describe('StorePetService', () => {
   let storePetService: StorePetService;

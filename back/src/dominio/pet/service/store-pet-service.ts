@@ -1,5 +1,5 @@
-import { PetRepository } from '../puerto/repositorio/pet-repository';
-import { Pet } from '../modelo/pet';
+import { PetRepository } from '../port/repository/pet-repository';
+import { Pet } from '../model/pet';
 
 export class StorePetService {
   constructor(private readonly _petRepository: PetRepository) {}

@@ -1,10 +1,10 @@
-import { StoreVaccineService } from "src/dominio/usuario/servicio/store-vaccine-service";
+import { StoreVaccineService } from "src/dominio/vaccine/service/store-vaccine-service";
 import { SinonStubbedInstance } from "sinon";
-import { VaccineRepository } from "src/dominio/usuario/puerto/repositorio/vaccine-repository";
+import { VaccineRepository } from "src/dominio/vaccine/port/repository/vaccine-repository";
 import { createStubObj } from "test/util/create-object.stub";
-import { Vaccine } from "src/dominio/usuario/modelo/vaccine";
-import { FindPetHandler } from "src/aplicacion/usuario/consulta/find-pet.handler";
-import { PetDao } from "src/dominio/usuario/puerto/dao/pet-dao";
+import { Vaccine } from "src/dominio/vaccine/model/vaccine";
+import { FindPetHandler } from "src/aplicacion/pet/query/find-pet.handler";
+import { PetDao } from "src/dominio/pet/port/dao/pet-dao";
 
 describe('StoreVaccineService', () => {
   let storeVaccineService: StoreVaccineService;

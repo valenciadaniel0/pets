@@ -1,7 +1,7 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { PetRepository } from 'src/dominio/usuario/puerto/repositorio/pet-repository';
+import { PetRepository } from 'src/dominio/pet/port/repository/pet-repository';
 import { PetEntity } from '../../entity/pet.entity';
-import { Pet } from 'src/dominio/usuario/modelo/pet';
+import { Pet } from 'src/dominio/pet/model/pet';
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 
@@ -11,6 +11,9 @@ export class PetMysqlRepository implements PetRepository {
     @InjectRepository(PetEntity)
     private readonly repository: Repository<PetEntity>,
   ) {}
+  async delete(id: number) {
+    await this.repository.delete(id);
+  }
 
   async find(id: number): Promise<Pet> {
     let petEntity: PetEntity = await this.repository.findOne({ id: id });

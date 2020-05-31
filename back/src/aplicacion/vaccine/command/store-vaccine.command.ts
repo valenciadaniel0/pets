@@ -1,6 +1,6 @@
 import { IsString, IsObject } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { Pet } from 'src/dominio/usuario/modelo/pet';
+import { Pet } from 'src/dominio/pet/model/pet';
 
 export class StoreVaccineCommand {
   @IsString()

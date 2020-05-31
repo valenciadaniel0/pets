@@ -3,7 +3,8 @@ import { Table, Button } from "react-bootstrap";
 import { Pet } from "./model/Pet";
 interface Props {
   pets: Array<Pet>;
-  handleOpen:(id:number)=>void
+  handleOpen: (id: number, petName: string) => void;
+  handleDeletePet: (id: number) => void;
 }
 class PetsList extends React.Component<Props, any> {
   renderPets() {
@@ -14,7 +15,26 @@ class PetsList extends React.Component<Props, any> {
           <td>{pet.name}</td>
           <td>{pet.birthDate}</td>
           <td>
-            <Button variant="info" onClick={()=>this.props.handleOpen(pet.id)}>👁</Button>
+            <Button
+              variant="info"
+              onClick={() => this.props.handleOpen(pet.id, pet.name)}
+            >
+              👁
+            </Button>
+          </td>
+          <td>
+            <Button
+              variant="primary"
+              onClick={() => this.props.handleOpen(pet.id, pet.name)}
+            >
+              ✎
+            </Button>
+            <Button
+              variant="danger"
+              onClick={() => this.props.handleDeletePet(pet.id)}
+            >
+              🗑
+            </Button>
           </td>
         </tr>
       );
@@ -31,6 +51,7 @@ class PetsList extends React.Component<Props, any> {
             <th>Name</th>
             <th>Date of birth</th>
             <th>Vaccines</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>{this.renderPets()}</tbody>

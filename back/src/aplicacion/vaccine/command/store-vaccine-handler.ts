@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { StoreVaccineService } from 'src/dominio/usuario/servicio/store-vaccine-service';
+import { StoreVaccineService } from 'src/dominio/vaccine/service/store-vaccine-service';
 import { StoreVaccineCommand } from './store-vaccine.command';
-import { Vaccine } from 'src/dominio/usuario/modelo/vaccine';
+import { Vaccine } from 'src/dominio/vaccine/model/vaccine';
 
 @Injectable()
 export class StoreVaccineHandler {
