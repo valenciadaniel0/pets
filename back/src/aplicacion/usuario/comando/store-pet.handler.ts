@@ -7,13 +7,13 @@ import { Pet } from 'src/dominio/usuario/modelo/pet';
 export class StorePetHandler {
   constructor(private readonly _storePetService: StorePetService) {}
 
-  async run(storePetCommand: StorePetCommand) {
+  async run(storePetCommand: StorePetCommand){
     await this._storePetService.run(
       new Pet(
         storePetCommand.name,
         storePetCommand.birthDate,
         storePetCommand.vaccines,
       ),
-    );
+    );    
   }
 }

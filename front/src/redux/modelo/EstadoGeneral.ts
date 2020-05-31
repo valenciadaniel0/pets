@@ -1,7 +1,7 @@
 import { EstadoProducto } from "./EstadoProducto";
-import { PetStatus } from "./PetStatus";
+import { PetsStatus } from "./PetsStatus";
 
 export interface EstadoGeneral {
   productos: EstadoProducto;
-  pets: PetStatus;
+  pets: PetsStatus;
 }

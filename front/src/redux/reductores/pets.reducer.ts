@@ -1,20 +1,21 @@
 import { Pet } from "../../componentes/pets/model/Pet";
 import {
   LIST_PETS,
+  SAVE_PET,
   PetsTypesActions,
 } from "../acciones/pets/pets-types-actions";
-import { PetStatus } from "../modelo/PetStatus";
+import { PetsStatus } from "../modelo/PetsStatus";
 
 
-const initialState: PetStatus = {
+const initialState: PetsStatus = {
   pets: Array<Pet>(),
-  totalQuantity: 0,
+  totalQuantity: 0  
 };
 
 export default function (
   state = initialState,
   action: PetsTypesActions
-): PetStatus {
+): PetsStatus {
   switch (action.type) {
     case LIST_PETS: {
       const pets = action.payload;
@@ -24,7 +25,7 @@ export default function (
         totalQuantity: action.totalQuantity,
       };
     }
-
+    
     default:
       return state;
   }

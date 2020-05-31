@@ -10,7 +10,7 @@ export class PetMysqlDao implements PetDao {
   ) {}
   async find(id: number): Promise<PetDto> {
     return await this.entityManager.query(
-      `SELECT * FROM pets u WHERE u.id=${id} LIMIT 1`,
+      `SELECT p.id,p.name, p.birthDate FROM pets p WHERE p.id=${id} LIMIT 1`,
     );
   }
   async findAll(): Promise<PetDto[]> {

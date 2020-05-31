@@ -9,6 +9,7 @@ import { StorePetHandler } from "src/aplicacion/usuario/comando/store-pet.handle
 import { petDaoProvider } from "./dao/pet-dao.provider";
 import { ListPetsHandler } from "src/aplicacion/usuario/consulta/list-pets.handler";
 import { PetDao } from "src/dominio/usuario/puerto/dao/pet-dao";
+import { FindPetHandler } from "src/aplicacion/usuario/consulta/find-pet.handler";
 
 @Module({
     imports: [TypeOrmModule.forFeature([PetEntity])],
@@ -17,13 +18,15 @@ import { PetDao } from "src/dominio/usuario/puerto/dao/pet-dao";
       petRepositoryProvider,      
       petDaoProvider,
       StorePetHandler,
-      ListPetsHandler
+      ListPetsHandler,
+      FindPetHandler
     ],
     exports: [
       StorePetService,
       StorePetHandler,
       PetRepository,
       ListPetsHandler,
+      FindPetHandler,
       PetDao      
     ],
   })
