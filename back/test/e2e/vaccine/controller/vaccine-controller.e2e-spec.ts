@@ -1,45 +1,47 @@
 import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
-import { RepositorioUsuario } from 'src/dominio/usuario/puerto/repositorio/repositorio-usuario';
-import { DaoUsuario } from 'src/dominio/usuario/puerto/dao/dao-usuario';
-import { RepositorioUsuarioMysql } from 'src/infraestructura/usuario/adaptador/repositorio/repositorio-usuario-mysql';
-import { DaoUsuarioMysql } from 'src/infraestructura/usuario/adaptador/dao/dao-usuario-mysql';
-import { HttpStatus, INestApplication } from '@nestjs/common';
+import { VaccineRepository } from 'src/dominio/vaccine/port/repository/vaccine-repository';
+import { VaccineDao } from 'src/dominio/vaccine/port/dao/vaccine-dao';
+import { VaccineMysqlRepository } from 'src/infraestructura/vaccine/adapter/repository/vaccine-mysql-repository';
+import { VaccineMysqlDao } from 'src/infraestructura/vaccine/adapter/dao/vaccine-mysql-dao';
+import { INestApplication, HttpStatus } from '@nestjs/common';
 import { FiltroExcepcionesDeNegocio } from 'src/infraestructura/excepciones/filtro-excepciones-negocio';
-import { createCustomStubInstance, CustomSinonStubbedInstance } from '../../../util/create-object.stub';
-import { UsuarioControlador } from 'src/infraestructura/usuario/controlador/usuario.controlador';
-import { ServicioRegistrarUsuario } from 'src/dominio/usuario/servicio/servicio-registrar-usuario';
-import { servicioRegistrarUsuarioProveedor } from 'src/infraestructura/usuario/proveedor/servicio/servicio-registrar-usuario.proveedor';
-import { ManejadorRegistrarUsuario } from 'src/aplicacion/usuario/comando/registar-usuario.manejador';
-import { ManejadorListarUsuario } from 'src/aplicacion/usuario/consulta/listar-usuarios.manejador';
-import { ComandoRegistrarUsuario } from 'src/aplicacion/usuario/comando/registrar-usuario.comando';
+import {
+  CustomSinonStubbedInstance,
+  createCustomStubInstance,
+} from 'test/util/create-object.stub';
+import { VaccineController } from 'src/infraestructura/vaccine/controller/vaccine-controller';
+import { StoreVaccineService } from 'src/dominio/vaccine/service/store-vaccine-service';
+import { storeVaccineServiceProvider } from 'src/infraestructura/vaccine/provider/service/store-vaccine-service-provider';
+import { StoreVaccineHandler } from 'src/aplicacion/vaccine/command/store-vaccine.handler';
+import { StoreVaccineCommand } from 'src/aplicacion/vaccine/command/store-vaccine.command';
 import { CeibaLogger } from 'src/infraestructura/configuracion/ceiba-logger.config';
 
-describe('Pruebas al controlador de usuarios', () => {
+
+describe('Tests to vaccine controller', () => {
 
   let app: INestApplication;
-  let repositorioUsuario: CustomSinonStubbedInstance<RepositorioUsuario>;
-  let daoUsuario: CustomSinonStubbedInstance<DaoUsuario>;
+  let vaccineRepository: CustomSinonStubbedInstance<VaccineRepository>;
+  let vaccineDao: CustomSinonStubbedInstance<VaccineDao>;
 
   /**
    * No Inyectar los módulos completos (Se trae TypeORM y genera lentitud al levantar la prueba, traer una por una las dependencias)
    **/
   beforeAll(async () => {
-    repositorioUsuario = createCustomStubInstance(RepositorioUsuarioMysql);
-    daoUsuario = createCustomStubInstance(DaoUsuarioMysql);
+    vaccineRepository = createCustomStubInstance(VaccineMysqlRepository);
+    vaccineDao = createCustomStubInstance(VaccineMysqlDao);
     const moduleRef = await Test.createTestingModule({
-      controllers: [UsuarioControlador],
+      controllers: [VaccineController],
       providers: [
         CeibaLogger,
         {
-          provide: ServicioRegistrarUsuario,
-          inject: [RepositorioUsuario],
-          useFactory: servicioRegistrarUsuarioProveedor,
+          provide: StoreVaccineService,
+          inject: [VaccineRepository],
+          useFactory: storeVaccineServiceProvider,
         },
-        { provide: RepositorioUsuario, useValue: repositorioUsuario },
-        { provide: DaoUsuario, useValue: daoUsuario },
-        ManejadorRegistrarUsuario,
-        ManejadorListarUsuario,
+        { provide: VaccineRepository, useValue: vaccineRepository },
+        { provide: VaccineDao, useValue: vaccineDao },
+        StoreVaccineHandler,        
       ],
     }).compile();
 
@@ -52,8 +54,8 @@ describe('Pruebas al controlador de usuarios', () => {
 
   beforeEach(() => {
 
-    repositorioUsuario._resetStubs();
-    daoUsuario._resetStubs();
+    vaccineRepository._resetStubs();
+    vaccineDao._resetStubs();
 
   });
 
@@ -61,7 +63,7 @@ describe('Pruebas al controlador de usuarios', () => {
     await app.close();
   });
 
-  it('debería listar los usuarios registrados', () => {
+  /* it('debería listar los usuarios registrados', () => {
 
     const usuarios: any[] = [{ nombre: 'Lorem ipsum', fechaCreacion: (new Date().toISOString()) }];
     daoUsuario.listar.returns(Promise.resolve(usuarios));    
@@ -100,5 +102,5 @@ describe('Pruebas al controlador de usuarios', () => {
       .expect(HttpStatus.BAD_REQUEST);
     expect(response.body.message).toBe(mensaje);
     expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
-  });
+  }); */
 });

@@ -11,7 +11,7 @@ describe('ServicioRegistrarUsuario', () => {
   beforeEach(() => {
     repositorioUsuarioStub = createStubObj<RepositorioUsuario>([
       'existeEmailUsuario',
-      'guardar',
+      'guardar'      
     ]);
     servicioRegistrarUsuario = new ServicioRegistrarUsuario(
       repositorioUsuarioStub,

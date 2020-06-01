@@ -4,6 +4,7 @@ import { PetEntity } from '../../entity/pet.entity';
 import { Pet } from 'src/dominio/pet/model/pet';
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
+import { VaccineEntity } from 'src/infraestructura/vaccine/entity/vaccine.entity';
 
 @Injectable()
 export class PetMysqlRepository implements PetRepository {
@@ -11,12 +12,19 @@ export class PetMysqlRepository implements PetRepository {
     @InjectRepository(PetEntity)
     private readonly repository: Repository<PetEntity>,
   ) {}
+  async update(id: number, pet: Pet) {
+    let petEntity: PetEntity = await this.repository.findOne({ id: id });
+    petEntity.name = pet.name;
+    petEntity.birthDate = pet.birthDate;
+    petEntity.vaccines = [];
+    await this.repository.save(petEntity);
+  }
   async delete(id: number) {
     await this.repository.delete(id);
   }
 
   async find(id: number): Promise<Pet> {
-    let petEntity: PetEntity = await this.repository.findOne({ id: id });
+    let petEntity: PetEntity = await this.repository.findOne({ id: id });    
     return new Pet(petEntity.name, petEntity.birthDate, []);
   }
 
@@ -25,9 +33,9 @@ export class PetMysqlRepository implements PetRepository {
   }
 
   async save(pet: Pet) {
-    const entity = new PetEntity();
-    entity.name = pet.name;
-    entity.birthDate = pet.birthDate;
-    await this.repository.save(entity);
+    const petEntity = new PetEntity();
+    petEntity.name = pet.name;
+    petEntity.birthDate = pet.birthDate;
+    await this.repository.save(petEntity);
   }
 }

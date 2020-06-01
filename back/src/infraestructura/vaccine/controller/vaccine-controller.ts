@@ -9,7 +9,7 @@ import {
   Query,
   Delete,
 } from '@nestjs/common';
-import { StoreVaccineHandler } from 'src/aplicacion/vaccine/command/store-vaccine-handler';
+import { StoreVaccineHandler } from 'src/aplicacion/vaccine/command/store-vaccine.handler';
 import { StoreVaccineCommand } from 'src/aplicacion/vaccine/command/store-vaccine.command';
 import { VaccineDto } from 'src/aplicacion/vaccine/query/dto/vaccine.dto';
 import { ListVaccinesHandler } from 'src/aplicacion/vaccine/query/list-vaccines.handler';

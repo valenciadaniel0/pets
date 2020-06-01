@@ -5,6 +5,7 @@ import {
   SAVE_PET,
   FIND_PET,
   DELETE_PET,
+  UPDATE_PET,
 } from "./pets-types-actions";
 import { PetRepository } from "../../../api/pets.repository";
 
@@ -25,6 +26,17 @@ export function savePet(
 ): PetsTypesActions {
   return {
     type: SAVE_PET,
+    payload: pets,
+    totalQuantity: totalQuantity,
+  };
+}
+
+export function updatePet(
+  pets: Array<Pet>,
+  totalQuantity: number
+): PetsTypesActions {
+  return {
+    type: UPDATE_PET,
     payload: pets,
     totalQuantity: totalQuantity,
   };
@@ -69,9 +81,18 @@ export function deletePetAsync(id: number) {
 export function savePetAsync(formValues: any) {
   return function (dispacth: any) {
     PetRepository.savePet(formValues).then((response: any) => {
-      alert("Your pet has been successfully stored");
       PetRepository.getByPage(1).then((listResponse: any) => {
         dispacth(deletePet(listResponse.data, listResponse.data.length));
+      });
+    });
+  };
+}
+
+export function updatePetAsync(id: number, formValues: any) {
+  return function (dispacth: any) {
+    PetRepository.updatePet(id, formValues).then((response: any) => {
+      PetRepository.getByPage(1).then((listResponse: any) => {
+        dispacth(updatePet(listResponse.data, listResponse.data.length));
       });
     });
   };
@@ -80,7 +101,7 @@ export function savePetAsync(formValues: any) {
 export function findPetAsync(id: number) {
   return function (dispacth: any) {
     PetRepository.findPet(id).then((response: any) => {
-      dispacth(findPet(response.data));
+      dispacth(findPet(response.data[0]));
     });
   };
 }

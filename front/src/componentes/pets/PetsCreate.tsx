@@ -100,5 +100,6 @@ export default compose<any>(
   reduxForm({
     form: "createPetForm",
     validate,
+    enableReinitialize: true,
   })
 )(PetsCreate);

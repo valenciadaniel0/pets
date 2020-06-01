@@ -4,6 +4,7 @@ import {
   SAVE_PET,
   PetsTypesActions,
   DELETE_PET,
+  UPDATE_PET,
 } from "../acciones/pets/pets-types-actions";
 import { PetsStatus } from "../modelo/PetsStatus";
 
@@ -17,25 +18,10 @@ export default function (
   action: PetsTypesActions
 ): PetsStatus {
   switch (action.type) {
-    case LIST_PETS: {
-      const pets = action.payload;
-      return {
-        ...state,
-        pets: pets,
-        totalQuantity: action.totalQuantity,
-      };
-    }
-
+    case LIST_PETS:
+    case SAVE_PET:
+    case UPDATE_PET:
     case DELETE_PET: {
-      const pets = action.payload;
-      return {
-        ...state,
-        pets: pets,
-        totalQuantity: action.totalQuantity,
-      };
-    }
-
-    case SAVE_PET: {
       const pets = action.payload;
       return {
         ...state,

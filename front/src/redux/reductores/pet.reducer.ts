@@ -2,7 +2,6 @@ import { PetStatus } from "../modelo/PetStatus";
 import {
   FIND_PET,
   PetsTypesActions,
-  SAVE_PET,
 } from "../acciones/pets/pets-types-actions";
 
 const initialState: PetStatus = {

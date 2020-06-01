@@ -5,7 +5,7 @@ import { StoreVaccineService } from 'src/dominio/vaccine/service/store-vaccine-s
 import { VaccineRepository } from 'src/dominio/vaccine/port/repository/vaccine-repository';
 import { storeVaccineServiceProvider } from './service/store-vaccine-service-provider';
 import { vaccineRepositoryProvider } from './repository/vaccine-repository-provider';
-import { StoreVaccineHandler } from 'src/aplicacion/vaccine/command/store-vaccine-handler';
+import { StoreVaccineHandler } from 'src/aplicacion/vaccine/command/store-vaccine.handler';
 import { ListVaccinesHandler } from 'src/aplicacion/vaccine/query/list-vaccines.handler';
 import { VaccineDao } from 'src/dominio/vaccine/port/dao/vaccine-dao';
 import { vaccineDaoProvider } from './dao/vaccine-dao.provider';

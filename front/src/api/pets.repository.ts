@@ -8,5 +8,7 @@ export const PetRepository = {
   findPet: (id: number) => axiosInstance.get(`/pets/${id}`),
   savePet: (formValues: any) =>
     axiosInstance.post(`/pets`, { ...formValues, vaccines: [] }),
+  updatePet: (id: number, formValues: any) =>
+    axiosInstance.put(`/pets/${id}`, { ...formValues, vaccines: [] }),
   deletePet: (id: number) => axiosInstance.delete(`/pets/${id}`),
 };

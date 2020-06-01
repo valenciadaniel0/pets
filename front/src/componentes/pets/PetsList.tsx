@@ -5,6 +5,7 @@ interface Props {
   pets: Array<Pet>;
   handleOpen: (id: number, petName: string) => void;
   handleDeletePet: (id: number) => void;
+  handleEditPet: (id: number) => void;
 }
 class PetsList extends React.Component<Props, any> {
   renderPets() {
@@ -13,7 +14,7 @@ class PetsList extends React.Component<Props, any> {
         <tr key={pet.id}>
           <td>{pet.id}</td>
           <td>{pet.name}</td>
-          <td>{pet.birthDate}</td>
+          <td>{new Date(pet.birthDate).toLocaleDateString()}</td>
           <td>
             <Button
               variant="info"
@@ -25,7 +26,7 @@ class PetsList extends React.Component<Props, any> {
           <td>
             <Button
               variant="primary"
-              onClick={() => this.props.handleOpen(pet.id, pet.name)}
+              onClick={() => this.props.handleEditPet(pet.id)}
             >
               ✎
             </Button>

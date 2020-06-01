@@ -26,7 +26,7 @@ export class Vaccine{
   private validateDateRequired(date: string) {
     if (!date || date === '') {
       throw new ErrorValorRequerido(
-        `The name date is required`,
+        `The date field is required`,
       );
     }
   }

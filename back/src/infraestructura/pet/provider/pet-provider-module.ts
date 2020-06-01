@@ -13,15 +13,20 @@ import { FindPetHandler } from "src/aplicacion/pet/query/find-pet.handler";
 import { DeletePetHandler } from "src/aplicacion/pet/command/delete-pet.handler";
 import { DeletePetService } from "src/dominio/pet/service/delete-pet-service";
 import { deletePetServiceProvider } from "./service/delete-pet-service-provider";
+import { UpdatePetService } from "src/dominio/pet/service/update-pet-service";
+import { updatePetServiceProvider } from "./service/update-pet-service-provider";
+import { UpdatePetHandler } from "src/aplicacion/pet/command/update-pet.handler";
 
 @Module({
     imports: [TypeOrmModule.forFeature([PetEntity])],
     providers: [
       { provide: StorePetService, inject: [PetRepository], useFactory: storePetServiceProvider },
       { provide: DeletePetService, inject: [PetRepository], useFactory: deletePetServiceProvider },
+      { provide: UpdatePetService, inject: [PetRepository], useFactory: updatePetServiceProvider },
       petRepositoryProvider,      
       petDaoProvider,      
       StorePetHandler,
+      UpdatePetHandler,
       ListPetsHandler,
       FindPetHandler,
       DeletePetHandler
@@ -29,6 +34,7 @@ import { deletePetServiceProvider } from "./service/delete-pet-service-provider"
     exports: [
       StorePetService,
       StorePetHandler,
+      UpdatePetHandler,
       PetRepository,
       ListPetsHandler,
       FindPetHandler,
