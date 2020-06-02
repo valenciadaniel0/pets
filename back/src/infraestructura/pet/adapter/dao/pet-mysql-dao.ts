@@ -2,7 +2,9 @@ import { PetDao } from 'src/dominio/pet/port/dao/pet-dao';
 import { PetDto } from 'src/aplicacion/pet/query/dto/pet.dto';
 import { InjectEntityManager } from '@nestjs/typeorm';
 import { EntityManager } from 'typeorm';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class PetMysqlDao implements PetDao {
   constructor(
     @InjectEntityManager()
