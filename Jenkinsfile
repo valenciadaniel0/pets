@@ -19,20 +19,20 @@ pipeline{
 			stage('Checkout') {
 				steps {
                 echo '------------>Checkout desde Git Microservicio<------------'
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], gitTool: 'Default' , submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'BuyGroupGithub', url: 'https://github.com/valenciadaniel0/pets']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], gitTool: 'Default' , submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'personal-github', url: 'https://github.com/valenciadaniel0/pets.git']]])
 				}
 			}
 		
 		
 			stage('compilar '){
                 steps {
-                    bat 'npm i'
-                    bat 'npm run build'					
+                    bat './back/npm i'
+                    bat './back/npm run build'					
 				}
             }
             stage('test '){
                 steps {
-                    bat 'npm run test:cov'					
+                    bat './back/npm run test:cov'					
 				}
             }
 
@@ -41,7 +41,7 @@ pipeline{
 			 	steps{
 			 		echo '------------>Analisis de código estático<------------'
 			 		  withSonarQubeEnv('Sonar') {
-                         bat "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=co.com.ceiba:pets.daniel.valencia.master -Dsonar.projectName=co.com.ceiba:pets.daniel.valencia.master -Dproject.settings=./sonar-project.properties"
+                         bat "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=co.com.ceiba:pets.daniel.valencia.master -Dsonar.projectName=co.com.ceiba:pets.daniel.valencia.master -Dproject.settings=./back/sonar-project.properties"
                       }
 			 	}
 			 }
