@@ -91,9 +91,11 @@ export function savePetAsync(formValues: any) {
 export function updatePetAsync(id: number, formValues: any) {
   return function (dispacth: any) {
     PetRepository.updatePet(id, formValues).then((response: any) => {
-      PetRepository.getByPage(1).then((listResponse: any) => {
-        dispacth(updatePet(listResponse.data, listResponse.data.length));
-      });
+      setTimeout(() => {
+        PetRepository.getByPage(1).then((listResponse: any) => {
+          dispacth(updatePet(listResponse.data, listResponse.data.length));
+        });
+      }, 1000);      
     });
   };
 }

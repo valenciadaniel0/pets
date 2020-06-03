@@ -1,5 +1,6 @@
 import React from "react";
 import { Modal, Button, Tabs, Tab } from "react-bootstrap";
+import swal from "sweetalert";
 import VaccinesList from "./VaccinesList";
 import { Vaccine } from "./model/Vaccine";
 import { EstadoGeneral } from "../../redux/modelo/EstadoGeneral";
@@ -33,11 +34,30 @@ class VaccinesModal extends React.Component<Props, any> {
     const petId = this.props.petId;
     this.props.saveVaccine({ ...formValues, pet: { id: petId } });
     this.setState({ activeTab: "list" });
+    swal("The Vaccine has been stored successfully", {
+      icon: "success",
+    });
   };
 
-  deleteVaccine(id: number, petId: number) {
-    this.props.deleteVaccine(id, petId);
-  }
+  deleteVaccine = (id: number, petId: number) => {
+    swal({
+      title: "Delete Vaccine",
+      text: "Are you sure you want to delete this vaccine?",
+      icon: "warning",
+      dangerMode: true,
+      buttons: ["Cancel", "Confirm"],
+    }).then((willDelete: boolean) => {
+      if (willDelete) {
+        this.props.deleteVaccine(id, petId);
+        swal("The vaccine has been successfully removed", {
+          icon: "success",
+        });
+        return false;
+      } else {
+        return false;
+      }
+    });
+  };
 
   setActiveTab(key: string) {
     this.setState({ activeTab: key });
@@ -74,9 +94,6 @@ class VaccinesModal extends React.Component<Props, any> {
         <Modal.Footer>
           <Button variant="secondary" onClick={this.props.handleClose}>
             Close
-          </Button>
-          <Button variant="primary" onClick={this.props.handleClose}>
-            Save Changes
           </Button>
         </Modal.Footer>
       </Modal>

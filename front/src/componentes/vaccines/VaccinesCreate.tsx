@@ -33,15 +33,15 @@ class VaccinesCreate extends React.Component<Props, any> {
     label: any;
     meta: any;
   }) => {
-    const className = `field ${meta.touched && meta.error ? "error" : ""}`;
+    const className = `field ${meta.touched && meta.error ? "has-error" : ""}`;
     return (
-      <div className="form-group">
+      <div className={`form-group ${className}`}>
         <label htmlFor={input.name}>{label}</label>
         <input
           {...input}
           autoComplete="off"
           id={input.name}
-          className="form-control"
+          className={`form-control`}
           type={"password" === input.name ? "password" : "text"}
         />
         {this.renderError(meta)}

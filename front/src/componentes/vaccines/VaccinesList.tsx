@@ -16,18 +16,19 @@ class VaccinesList extends React.Component<Props, any> {
     if (0 === this.props.vaccines.length) {
       return (
         <tr>
-          <td colSpan={3}>
+          <td colSpan={4}>
             <span>No vaccines for {this.props.petName}</span>
           </td>
         </tr>
       );
     }
+
     return this.props.vaccines.map((vaccine) => {
       return (
         <tr key={vaccine.id}>
           <td>{vaccine.id}</td>
           <td>{vaccine.name}</td>
-          <td>{vaccine.date}</td>
+          <td>{new Date(vaccine.date).toLocaleDateString()}</td>
           <td>
             <Button
               variant="danger"

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60% </span>
+                <span class="strong">96% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>15/25</span>
+                <span class='fraction'>24/25</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">56.52% </span>
+                <span class="strong">95.65% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/23</span>
+                <span class='fraction'>22/23</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -137,12 +137,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -152,25 +165,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
@@ -194,26 +194,26 @@ import { UpdatePetHandler } from 'src/aplicacion/pet/command/update-pet.handler'
 &nbsp;
 @Controller('pets')
 export class PetController {
-<span class="fstat-no" title="function not covered" >  constructor(</span>
-    private readonly <span class="cstat-no" title="statement not covered" >_storePetHandler: S</span>torePetHandler,
-    private readonly <span class="cstat-no" title="statement not covered" >_deletePetHandler: D</span>eletePetHandler,
-    private readonly <span class="cstat-no" title="statement not covered" >_listPetsHandler: L</span>istPetsHandler,
-    private readonly <span class="cstat-no" title="statement not covered" >_findPetsHandler: F</span>indPetHandler,
-    private readonly <span class="cstat-no" title="statement not covered" >_updatePetHandler: U</span>pdatePetHandler,
+  constructor(
+    private readonly _storePetHandler: StorePetHandler,
+    private readonly _deletePetHandler: DeletePetHandler,
+    private readonly _listPetsHandler: ListPetsHandler,
+    private readonly _findPetsHandler: FindPetHandler,
+    private readonly _updatePetHandler: UpdatePetHandler,
   ) {}
 &nbsp;
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
-<span class="fstat-no" title="function not covered" >  async </span>create(@Body() storePetCommand: StorePetCommand) {
-<span class="cstat-no" title="statement not covered" >    await this._storePetHandler.run(storePetCommand);</span>
+  async create(@Body() storePetCommand: StorePetCommand) {
+    await this._storePetHandler.run(storePetCommand);
   }
 &nbsp;
   @Put(':id')
-<span class="fstat-no" title="function not covered" >  async </span>update(
+  async update(
     @Param('id') id: number,
     @Body() storePetCommand: StorePetCommand,
   ) {
-<span class="cstat-no" title="statement not covered" >    return this._updatePetHandler.run(id, storePetCommand);</span>
+    return this._updatePetHandler.run(id, storePetCommand);
   }
 &nbsp;
   @Delete(':id')
@@ -222,13 +222,13 @@ export class PetController {
   }
 &nbsp;
   @Get()
-<span class="fstat-no" title="function not covered" >  async </span>list(): Promise&lt;PetDto[]&gt; {
-<span class="cstat-no" title="statement not covered" >    return await this._listPetsHandler.run();</span>
+  async list(): Promise&lt;PetDto[]&gt; {
+    return await this._listPetsHandler.run();
   }
 &nbsp;
   @Get(':id')
-<span class="fstat-no" title="function not covered" >  async </span>find(@Param() params: any): Promise&lt;PetDto&gt; {
-<span class="cstat-no" title="statement not covered" >    return this._findPetsHandler.run(params.id);</span>
+  async find(@Param() params: any): Promise&lt;PetDto&gt; {
+    return this._findPetsHandler.run(params.id);
   }
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -238,7 +238,7 @@ export class PetController {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Jun 02 2020 09:18:53 GMT-0500 (Colombia Standard Time)
+                at Wed Jun 03 2020 08:38:12 GMT-0500 (Colombia Standard Time)
             </div>
         </div>
         <script src="../../../../prettify.js"></script>

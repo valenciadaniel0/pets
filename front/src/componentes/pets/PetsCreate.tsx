@@ -1,9 +1,9 @@
 import React from "react";
 import { Form, FormGroup } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
-import PrimaryButton from "../shared/PrimaryButton";
-import DatePicker, { formatDates, normalizeDates } from "../shared/DatePicker";
 import { compose } from "redux";
+import PrimaryButton from "../shared/PrimaryButton";
+import DatePicker, { normalizeDates, formatDates } from "../shared/DatePicker";
 
 interface Props {
   onSubmit: (formValues: any) => void;
@@ -32,15 +32,15 @@ class PetsCreate extends React.Component<Props, any> {
     label: any;
     meta: any;
   }) => {
-    const className = `field ${meta.touched && meta.error ? "error" : ""}`;
+    const className = `field ${meta.touched && meta.error ? "has-error" : ""}`;
     return (
-      <div className="form-group">
+      <div className={`form-group ${className}`}>
         <label htmlFor={input.name}>{label}</label>
         <input
           {...input}
           autoComplete="off"
           id={input.name}
-          className="form-control"
+          className={`form-control`}
           type={"password" === input.name ? "password" : "text"}
         />
         {this.renderError(meta)}

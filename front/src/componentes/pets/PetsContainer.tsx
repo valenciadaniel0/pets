@@ -1,5 +1,6 @@
 import React from "react";
 import { EstadoGeneral } from "../../redux/modelo/EstadoGeneral";
+import swal from "sweetalert";
 import { Pet } from "./model/Pet";
 import PetsList from "./PetsList";
 import { connect } from "react-redux";
@@ -42,13 +43,18 @@ class PetsContainer extends React.Component<Props, any> {
   }
 
   onSubmitPets = (formValues: any) => {
+    let message = "The pet has been successfully stored";
     if (!this.state.editingPet) {
       this.props.savePet(formValues);
-    } else {      
+    } else {
       formValues.birthDate = this.formatDate(new Date(formValues.birthDate));
-      this.props.updatePet(this.props.pet.id, formValues);      
+      this.props.updatePet(this.props.pet.id, formValues);
+      message = "The pet has been successfully updated";
     }
-    this.setState({ open: false });
+    swal(message, {
+      icon: "success",
+    });
+    this.setState({ open: false });    
   };
 
   handleOpenModal = (id: number, name: string) => {
@@ -60,7 +66,23 @@ class PetsContainer extends React.Component<Props, any> {
   };
 
   deletePet = (id: number) => {
-    this.props.deletePet(id);
+    swal({
+      title: "Delete Pet",
+      text: "Are you sure you want to delete this pet?",
+      icon: "warning",
+      dangerMode: true,
+      buttons: ["Cancel", "Confirm"],
+    }).then((willDelete: boolean) => {
+      if (willDelete) {
+        this.props.deletePet(id);
+        swal("The pet has been successfully removed", {
+          icon: "success",
+        });
+        return false;
+      } else {
+        return false;
+      }
+    });
   };
 
   editPet = (id: number) => {
@@ -119,7 +141,8 @@ class PetsContainer extends React.Component<Props, any> {
       date.getMonth() + 1 < 10
         ? "0" + (date.getMonth() + 1) + "-"
         : date.getMonth() + 1 + "-";
-    result += date.getUTCDate() < 10 ? "0" + date.getUTCDate() : date.getUTCDate() + "";    
+    result +=
+      date.getUTCDate() < 10 ? "0" + date.getUTCDate() : date.getUTCDate() + "";
     return result;
   }
 }
