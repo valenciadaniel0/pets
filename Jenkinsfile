@@ -26,13 +26,13 @@ pipeline{
 		
 			stage('compilar '){
                 steps {
-                    bat '\\back\\npm i'
-                    bat '\\back\\npm run build'					
+                    bat 'npm i ./back/'
+                    bat 'npm run build ./back/'					
 				}
             }
             stage('test '){
                 steps {
-                    bat '\\back\\npm run test:cov'					
+                    bat 'npm run test:cov ./back/'					
 				}
             }
 
@@ -41,7 +41,7 @@ pipeline{
 			 	steps{
 			 		echo '------------>Analisis de código estático<------------'
 			 		  withSonarQubeEnv('Sonar') {
-                         bat "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=co.com.ceiba:pets.daniel.valencia.master -Dsonar.projectName=co.com.ceiba:pets.daniel.valencia.master -Dproject.settings=\\back\\sonar-project.properties"
+                         bat "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=co.com.ceiba:pets.daniel.valencia.master -Dsonar.projectName=co.com.ceiba:pets.daniel.valencia.master -Dproject.settings=/back/sonar-project.properties"
                       }
 			 	}
 			 }
