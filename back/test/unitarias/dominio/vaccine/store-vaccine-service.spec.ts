@@ -3,8 +3,6 @@ import { SinonStubbedInstance } from 'sinon';
 import { VaccineRepository } from 'src/dominio/vaccine/port/repository/vaccine-repository';
 import { createStubObj } from 'test/util/create-object.stub';
 import { Vaccine } from 'src/dominio/vaccine/model/vaccine';
-import { FindPetHandler } from 'src/aplicacion/pet/query/find-pet.handler';
-import { PetDao } from 'src/dominio/pet/port/dao/pet-dao';
 import { Pet } from 'src/dominio/pet/model/pet';
 import { DeleteVaccineService } from 'src/dominio/vaccine/service/delete-vaccine-service';
 

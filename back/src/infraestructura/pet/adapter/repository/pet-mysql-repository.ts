@@ -4,7 +4,6 @@ import { PetEntity } from '../../entity/pet.entity';
 import { Pet } from 'src/dominio/pet/model/pet';
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
-import { VaccineEntity } from 'src/infraestructura/vaccine/entity/vaccine.entity';
 
 @Injectable()
 export class PetMysqlRepository implements PetRepository {

@@ -44,8 +44,7 @@ pipeline {
             steps {
                 echo '------------>Analisis de código estático<------------'
                 withSonarQubeEnv('Sonar') {
-                    bat "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=co.com.ceiba:pets.daniel.valencia.master -Dsonar.projectName=co.com.ceiba:pets.daniel.valencia.master -Dproject.settings=/back/sonar-project.properties"
-                    //bat "${dirSonar}\\bin\\sonar-scanner"
+                    bat "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=co.com.ceiba:pets.daniel.valencia.master -Dsonar.projectName=co.com.ceiba:pets.daniel.valencia.master -Dproject.settings=/back/sonar-project.properties"                    
                 }
             }
                 }

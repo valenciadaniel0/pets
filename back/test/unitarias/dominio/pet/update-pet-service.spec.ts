@@ -2,21 +2,15 @@ import { UpdatePetService } from 'src/dominio/pet/service/update-pet-service';
 import { PetRepository } from 'src/dominio/pet/port/repository/pet-repository';
 import { createStubObj } from 'test/util/create-object.stub';
 import { SinonStubbedInstance } from 'sinon';
-import { FindPetHandler } from 'src/aplicacion/pet/query/find-pet.handler';
-import { PetDao } from 'src/dominio/pet/port/dao/pet-dao';
 import { Pet } from 'src/dominio/pet/model/pet';
 
 describe('UpdatePetService', () => {
-  let updatePetService: UpdatePetService;
-  let findPetHanler: FindPetHandler;
-  let petRepositoryStub: SinonStubbedInstance<PetRepository>;
-  let petDaoStub: SinonStubbedInstance<PetDao>;
+  let updatePetService: UpdatePetService;  
+  let petRepositoryStub: SinonStubbedInstance<PetRepository>;  
 
   beforeEach(() => {
-    petRepositoryStub = createStubObj<PetRepository>(['update']);
-    petDaoStub = createStubObj<PetDao>(['find']);
-    updatePetService = new UpdatePetService(petRepositoryStub);
-    findPetHanler = new FindPetHandler(petDaoStub);
+    petRepositoryStub = createStubObj<PetRepository>(['update']);    
+    updatePetService = new UpdatePetService(petRepositoryStub);    
   });
 
   it('A pet with all the fields should be updated', async () => {

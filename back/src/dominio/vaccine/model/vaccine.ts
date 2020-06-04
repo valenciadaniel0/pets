@@ -1,5 +1,4 @@
 import { ErrorValorRequerido } from "src/dominio/errores/error-valor-requerido";
-import { ManyToOne } from "typeorm";
 import { Pet } from "../../pet/model/pet";
 
 export class Vaccine{
