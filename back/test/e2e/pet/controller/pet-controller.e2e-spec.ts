@@ -82,7 +82,7 @@ describe('Pet controller tests', () => {
     ];
     petDao.findAll.returns(Promise.resolve(pets));
     return request(app.getHttpServer())
-      .get('/pets')
+      .get('/pets?limit=10&offset=10')
       .expect(HttpStatus.OK)
       .expect(pets);
   });
